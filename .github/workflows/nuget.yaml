@@ -1,0 +1,42 @@
+name: OpSsd1306 nuget pack & push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup dockcross
+        run: |
+          docker run --rm dockcross/linux-arm64 > ./dockcross-linux-arm64
+          chmod +x ./dockcross-linux-arm64
+
+      - name: Build libopssd1306.so
+        run: |
+          ./dockcross-linux-arm64 bash -c '
+            dpkg --add-architecture arm64
+            apt update && apt install -y libfreetype6-dev:arm64
+            git clone https://github.com/orangepi-xunlong/wiringOP.git
+            cd wiringOP
+            find . -name Makefile | xargs sed -i "s:gcc:$CC:g"
+            PREFIX= ./build || true
+            cd ..
+            make -C ssd1306 libopssd1306.so'
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9
+
+      - name: Pack
+        run: make OpSsd1306
+
+      - name: Push Nuget
+        run: |
+          dotnet nuget push ./bindings/cs/OpSsd1306/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
+          dotnet nuget push ./bindings/cs/lib/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}

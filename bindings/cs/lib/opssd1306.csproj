@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Sorac.OpSsd1306.lib</PackageId>
+    <Version>1.0.1</Version>
+    <Authors>CrackTC</Authors>
+    <Description>OpSsd1306 native assets</Description>
+    <PackageProjectUrl>https://github.com/CrackTC/opssd1306</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CrackTC/opssd1306</RepositoryUrl>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <PackageLicenseExpression>GPL-2.0-only</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+  <None Include="../../../ssd1306/libopssd1306.so">
+      <Pack>true</Pack>
+      <PackagePath>runtimes/linux-arm64/native</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
+

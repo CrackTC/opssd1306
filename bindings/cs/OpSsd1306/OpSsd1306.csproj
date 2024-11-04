@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Sorac.OpSsd1306</PackageId>
+    <Version>1.0.1</Version>
+    <Authors>CrackTC</Authors>
+    <Description>OpSsd1306 is a library for SSD1306 OLED display.</Description>
+    <PackageProjectUrl>https://github.com/CrackTC/opssd1306</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CrackTC/opssd1306</RepositoryUrl>
+    <PackageLicenseExpression>GPL-2.0-only</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Sorac.OpSsd1306.lib" Version="1.0.1" />
+  </ItemGroup>
+
+</Project>

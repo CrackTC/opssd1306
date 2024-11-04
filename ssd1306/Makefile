@@ -1,16 +1,16 @@
 SRC := $(wildcard *.c)
 OBJ := $(SRC:.c=.o)
-CFLAGS := -Wall -Wextra -Werror -O2 -std=c99 -I/usr/include/freetype2
+CFLAGS := -Wall -Wextra -Werror -O2 -std=c99 -I/usr/include -L/usr/lib -L/usr/lib/aarch64-linux-gnu -I/usr/include/freetype2
 
-libssd1306.so: $(OBJ)
+libopssd1306.so: $(OBJ)
 	$(CC) $(CFLAGS) -shared -o $@ $^ -lwiringPi -lfreetype
 
-libssd1306.a: $(OBJ)
+libopssd1306.a: $(OBJ)
 	ar rcs $@ $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -fPIC -c -o $@ $<
 
 clean:
-	rm -f $(OBJ) libssd1306.so libssd1306.a
+	rm -f $(OBJ) libopssd1306.so libopssd1306.a
 .PHONY: clean
